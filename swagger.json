@@ -7,9 +7,13 @@
     "termsOfService": "",
     "contact": {
       "name": "Sapphire SiteConfiguration API",
-      "url": "https://doverfs.com",
+      "url": "doverfs.com",
       "email": "sapphire@doverfs.com"
     }
+"host": {
+    "host": "https://api-sapphire.dataservices-qa.doverfs.com/siteconfigurationapi/index.html",
+    "schemes": "https"
+    }    
   },
   "paths": {
     "/sites/{siteId}/contacts": {
