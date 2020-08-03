@@ -3,8 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "SiteConfiguration",
-    "host": "https://api-sapphire.dataservices-qa.doverfs.com/siteconfigurationapi/index.html",
-    "schemes": "https",
+    
     "description": "Sapphire Wetstock Reconcillation (ASP.NET Core 2.0)",
     "termsOfService": "",
     "contact": {
@@ -29,6 +28,20 @@
           "text/json"
         ],
         "parameters": [
+           {
+            "host": "https://api-sapphire.dataservices-qa.doverfs.com/siteconfigurationapi/index.html",
+            "in": "path",
+            "description": "Host URL.","schemes": "https",
+            "required": true,
+            "type": "string"
+          },
+         {
+            "schemes": "https",
+            "in": "path",
+            "description": "Host URL Scheme.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "siteId",
             "in": "path",
