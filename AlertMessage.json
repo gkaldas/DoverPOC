@@ -1,0 +1,66 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "AlertMessage",
+    "description": "AlertMessage",
+    "termsOfService": "",
+    "contact": {
+      "name": "AlertMessage",
+      "url": "doveronk2.com",
+      "email": "davidl@k2.com"
+    }
+  },
+  "host": "dover.onk2.com",
+  "basePath": "/Alert",
+  "schemes": [
+    "https"
+  ],
+  "definitions": {
+    "AlertMessage": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "siteId": { "type": "string" },
+        "componentType": { "type": "string" },
+        "alertCategory": { "type": "string" },
+        "alertType": { "type": "string" },
+        "isPending": { "type": "boolean" },
+        "dataType": { "type": "string" },
+        "isAcknowledged": { "type": "boolean" },
+        "acknowledgedBy": { "type": "string" },
+        "acknowledgedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "comment": { "type": "string" },
+        "createdAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "businessDay": {
+          "format": "date",
+          "type": "string"
+        },
+        "isActive": { "type": "boolean" },
+        "alertStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "alertEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "workflowIds": {
+          "format": "nullable",
+          "type": "string"
+        },
+        "notificationIds": {
+          "format": "nullable",
+          "type": "string"
+        },
+        "siteName": { "type": "string" }
+      }
+    }
+  }
+}
