@@ -1,0 +1,2999 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SiteConfiguration",
+    "description": "Sapphire Wetstock Reconcillation (ASP.NET Core 2.0)",
+    "termsOfService": "",
+    "contact": {
+      "name": "Sapphire SiteConfiguration API",
+      "url": "https://doverfs.com",
+      "email": "sapphire@doverfs.com"
+    }
+  },
+  "paths": {
+    "/sites/{siteId}/contacts": {
+      "get": {
+        "tags": [
+          "Contact"
+        ],
+        "summary": "This will provide site configuration for the requested data.",
+        "operationId": "SitesBySiteIdContactsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The Site or Device Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "primaryOnly",
+            "in": "query",
+            "description": "return only primary contact",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Settigs Configurations found for the request.",
+            "schema": {
+              "$ref": "#/definitions/SiteConfiguration"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id/Device id cannot be default."
+          },
+          "412": {
+            "description": "NotFound. Configuration document is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/forecourtControllers/{forecourtControllerNumber}": {
+      "get": {
+        "tags": [
+          "ForecourtController"
+        ],
+        "summary": "This will provide a fuel Controller data for the requested site and fuel Controller id",
+        "operationId": "SitesBySiteIdForecourtControllersByForecourtControllerNumberGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forecourtControllerNumber",
+            "in": "path",
+            "description": "The fuel Controller Number for which the data to retrieved.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Fuel Controller found for the requested id.",
+            "schema": {
+              "$ref": "#/definitions/ForecourtController"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site id is mandatory and cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Fuel Controller not found for the requested id."
+          },
+          "412": {
+            "description": "PreconditionFailed. No site configuration document found for the requested site."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/forecourtControllers": {
+      "get": {
+        "tags": [
+          "ForecourtController"
+        ],
+        "summary": "This will provide all the fuel Controllers for the requested site",
+        "operationId": "SitesBySiteIdForecourtControllersGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Fuel Controllers found for the requested id.",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ForecourtController"
+              }
+            }
+          },
+          "204": {
+            "description": "Fuel Controllers not found for the requested siteId."
+          },
+          "400": {
+            "description": "BadRequest. Site id is mandatory and cannot be default."
+          },
+          "412": {
+            "description": "Precondition failed. No site configuration document found for the requested site."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/fuelingPoints/{fuelingPointId}": {
+      "get": {
+        "tags": [
+          "FuelingPoint"
+        ],
+        "summary": "This will provide a fueling point data for the requested site and fueling point id",
+        "operationId": "SitesBySiteIdFuelingPointsByFuelingPointIdGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fuelingPointId",
+            "in": "path",
+            "description": "The fueling point id for which the data to retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Fueling point found for the requested id.",
+            "schema": {
+              "$ref": "#/definitions/FuelingPoint"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site id is mandatory and cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Fueling point not found for the requested id."
+          },
+          "412": {
+            "description": "PreconditionFailed. No site configuration document found for the requested site."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/fuelingPoints": {
+      "get": {
+        "tags": [
+          "FuelingPoint"
+        ],
+        "summary": "This will provide all the fueling points for the requested site",
+        "operationId": "SitesBySiteIdFuelingPointsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Fueling points found for the requested id.",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FuelingPoint"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent. No fueling points found for the requested site."
+          },
+          "400": {
+            "description": "BadRequest. Site id is mandatory and cannot be default."
+          },
+          "412": {
+            "description": "Precondition failed. No site configuration document found for the requested site."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/Health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "This will do the health status check.",
+        "operationId": "HealthGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/lines": {
+      "get": {
+        "tags": [
+          "Line"
+        ],
+        "summary": "",
+        "operationId": "SitesBySiteIdLinesGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeLineNumber",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "edgeATGNumber",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "lineId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Line Configuration found for the request.",
+            "schema": {
+              "$ref": "#/definitions/Line"
+            }
+          },
+          "404": {
+            "description": "No line configuration found for the request."
+          },
+          "412": {
+            "description": "Precondition failed. No site configuration document found for the requested site. If found then the line may not exists."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/manifolds": {
+      "get": {
+        "tags": [
+          "Manifold"
+        ],
+        "summary": "This will provide all the manifolds for the requested site",
+        "operationId": "SitesBySiteIdManifoldsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Manifolds found for the request.",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Manifold"
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site id is mandatory and cannot be default."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/manifolds/{manifoldId}": {
+      "get": {
+        "tags": [
+          "Manifold"
+        ],
+        "summary": "This will provide tank information for the requested manifoldId and siteId.",
+        "operationId": "SitesBySiteIdManifoldsByManifoldIdGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The Site Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "manifoldId",
+            "in": "path",
+            "description": "The Manifold Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Manifold Information found for the request.",
+            "schema": {
+              "$ref": "#/definitions/Manifold"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id/Manifold Id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Manifold Information is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/manifolds/pinpoints": {
+      "get": {
+        "tags": [
+          "Manifold"
+        ],
+        "summary": "This will provide manifold details for a siteId.",
+        "operationId": "SitesBySiteIdManifoldsPinpointsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Manifold Information found for the request.",
+            "schema": {
+              "$ref": "#/definitions/ManifoldDetails"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Manifold Information is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/metercalibration": {
+      "put": {
+        "tags": [
+          "MeterCalibration"
+        ],
+        "summary": "Update meter calibration",
+        "operationId": "SitesBySiteIdMetercalibrationPut",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "meterCalibration",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeterCalibration"
+            }
+          },
+          {
+            "name": "siteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Requested meter calibration is replaced."
+          },
+          "400": {
+            "description": "BadRequest. Site Id/Nozzle Id cannot be default."
+          },
+          "409": {
+            "description": "Conflict. ETag does not match."
+          },
+          "412": {
+            "description": "PreconditionFailed. No matching meter calibration document found."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MeterCalibration"
+        ],
+        "summary": "Post meter calibration",
+        "operationId": "SitesBySiteIdMetercalibrationPost",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "meterCalibration",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MeterCalibration"
+            }
+          },
+          {
+            "name": "siteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success. The requested meter calibration is created."
+          },
+          "400": {
+            "description": "BadRequest. siteId or nozzleId cannot be default."
+          },
+          "409": {
+            "description": "Conflict. The requested meter calibration already exists."
+          },
+          "412": {
+            "description": "PreconditionFailed. Site config/nozzle not found."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MeterCalibration"
+        ],
+        "summary": "Delete meter calibration by id",
+        "operationId": "SitesBySiteIdMetercalibrationDelete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "siteId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success. Requested Meter calibration  is deleted."
+          },
+          "400": {
+            "description": "BadRequest. Id cannot be default."
+          },
+          "409": {
+            "description": "Conflict. ETag does not match."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/metercalibration/{nozzleId}": {
+      "get": {
+        "tags": [
+          "MeterCalibration"
+        ],
+        "summary": "Get meter calibration by siteid nozzleid and effective date",
+        "operationId": "SitesBySiteIdMetercalibrationByNozzleIdGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nozzleId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "effectiveDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meter calibration found for the request.",
+            "schema": {
+              "$ref": "#/definitions/MeterCalibration"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id/NozzleId id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Meter calibration document is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/nozzles": {
+      "get": {
+        "tags": [
+          "Nozzle"
+        ],
+        "summary": "Gets Nozzle configuration document for the given site id",
+        "operationId": "SitesBySiteIdNozzlesGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/nozzles/{nozzleNumber}": {
+      "get": {
+        "tags": [
+          "Nozzle"
+        ],
+        "summary": "Gets Nozzle configuration document for the given site id",
+        "operationId": "SitesBySiteIdNozzlesByNozzleNumberGet",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nozzleNumber",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/sensors": {
+      "get": {
+        "tags": [
+          "Sensor"
+        ],
+        "summary": "",
+        "operationId": "SitesBySiteIdSensorsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeATGNumber",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sensorCategory",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "edgeSensorNumber",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sensorId",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Sensor Configuration found for the request.",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "404": {
+            "description": "No Sensor configuration found for the request."
+          },
+          "412": {
+            "description": "Precondition failed. No site configuration document found for the requested site. If found then the Sensor may not exists."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites": {
+      "put": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "The will update the requested site configuration",
+        "operationId": "SitesPut",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "siteConfigToUpdateApi",
+            "in": "body",
+            "description": "The site configuration to be replaced.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteConfiguration"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Requested configuration is replaced."
+          },
+          "400": {
+            "description": "BadRequest. Site Configuration cannot be default."
+          },
+          "409": {
+            "description": "Conflict. The requested device cannot be linked to the site. The existing device in the site has to de-commissioned before linking new device."
+          },
+          "412": {
+            "description": "PreconditionFailed. No matching site configuration document found."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "This will create a new site configuration for the requested site.",
+        "operationId": "SitesPost",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "siteConfigurationApi",
+            "in": "body",
+            "description": "The SiteConfiguration to be created.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteConfiguration"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success. The requested site configuration is created."
+          },
+          "400": {
+            "description": "BadRequest. SiteId cannot be default."
+          },
+          "409": {
+            "description": "Conflict. The requested site configuration already exists."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}": {
+      "delete": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "This will delete the requested site configuration.",
+        "operationId": "SitesBySiteIdDelete",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The Site Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success. Requested site configuration is deleted."
+          },
+          "400": {
+            "description": "BadRequest. SiteId is mandatory and cannot be default."
+          },
+          "409": {
+            "description": "Conflict. ETag does not match."
+          },
+          "412": {
+            "description": "PreconditionFailed. No matching configuration found to delete."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteOrDeviceId}": {
+      "get": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "This will provide site configuration for the requested data.",
+        "operationId": "SitesBySiteOrDeviceIdGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteOrDeviceId",
+            "in": "path",
+            "description": "The Site or Device Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "The start date at which the site has been started.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "isDeviceId",
+            "in": "query",
+            "description": "Should be passed as true if the device id is passed in previous argument.If it is site id by default it would be false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurations found for the request.",
+            "schema": {
+              "$ref": "#/definitions/SiteConfiguration"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id/Device id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Configuration document is not found."
+          }
+        }
+      }
+    },
+    "/sites/deliveryinfo": {
+      "get": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "This will provide site configuration for the requested data.",
+        "operationId": "SitesDeliveryinfoGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "deliveryInfoProvider",
+            "in": "query",
+            "description": "Provider for the delivery information",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deliverySiteIdentifier",
+            "in": "query",
+            "description": "Site Identifier based on the Delivery information provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "The start date at which the site has been started.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurations found for the request.",
+            "schema": {
+              "$ref": "#/definitions/SiteConfiguration"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id/Device id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Configuration document is not found."
+          }
+        }
+      }
+    },
+    "/sites/sirInfo": {
+      "get": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "This will provide site configuration for the requested data.",
+        "operationId": "SitesSirInfoGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "sirInfoProvider",
+            "in": "query",
+            "description": "Provider for the SIR information",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sirSiteIdentifier",
+            "in": "query",
+            "description": "Site Identifier based on the SIR information provider",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "The start date at which the site has been started.",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurations found for the request.",
+            "schema": {
+              "$ref": "#/definitions/SiteConfiguration"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id/Device id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Configuration document is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/linkDevice": {
+      "put": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "This will link the requested device and site",
+        "operationId": "SitesBySiteIdLinkDevicePut",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The Site Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "query",
+            "description": "The Device Id.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Device linked with the requested site configuration."
+          },
+          "400": {
+            "description": "BadRequest. Site Id cannot be default."
+          },
+          "409": {
+            "description": "Conflict. Device linked to an existing site."
+          },
+          "412": {
+            "description": "PreconditionFailed. No matching site configuration document found."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/ids": {
+      "get": {
+        "tags": [
+          "SiteConfiguration"
+        ],
+        "summary": "This will provide list of site ids.",
+        "operationId": "SitesIdsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 100
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurations found for the request.",
+            "schema": {
+              "$ref": "#/definitions/ResultSet[SiteIdOrgIdPair]"
+            }
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sitehistory/{siteId}": {
+      "get": {
+        "tags": [
+          "SiteHistory"
+        ],
+        "summary": "This provides all versions of the site configuration for the requested data.",
+        "operationId": "SitehistoryBySiteIdGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Configurations found for the request.",
+            "schema": {
+              "$ref": "#/definitions/SiteConfiguration"
+            }
+          },
+          "404": {
+            "description": "NotFound. Configuration document is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/tanks": {
+      "get": {
+        "tags": [
+          "Tank"
+        ],
+        "summary": "This will provide a tank configuration for the request.",
+        "operationId": "SitesBySiteIdTanksGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeTankNumber",
+            "in": "query",
+            "description": "The edge tank number.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "edgeATGNumber",
+            "in": "query",
+            "description": "The edge atg number.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Tank Configuration found for the request.",
+            "schema": {
+              "$ref": "#/definitions/Tank"
+            }
+          },
+          "404": {
+            "description": "No tank configuration found for the request."
+          },
+          "412": {
+            "description": "Precondition failed. No site configuration document found for the requested site. If found then the tank gauge may not exists."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/tanks/{tankId}": {
+      "get": {
+        "tags": [
+          "Tank"
+        ],
+        "summary": "This will provide tank information for the requested tankId and siteId.",
+        "operationId": "SitesBySiteIdTanksByTankIdGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The Site Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tankId",
+            "in": "path",
+            "description": "The Tank Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tank Information found for the request.",
+            "schema": {
+              "$ref": "#/definitions/TankInfo"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id/Tank Id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Tank Information is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/tanks/pinpoints": {
+      "get": {
+        "tags": [
+          "Tank"
+        ],
+        "summary": "This will provide tanks details for a siteId.",
+        "operationId": "SitesBySiteIdTanksPinpointsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tank  Information found for the request.",
+            "schema": {
+              "$ref": "#/definitions/TankDetails"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site Id cannot be default."
+          },
+          "404": {
+            "description": "NotFound. Tank Information is not found."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/atgs": {
+      "get": {
+        "tags": [
+          "TankGauge"
+        ],
+        "summary": "This will provide all the tank gauges for the requested site",
+        "operationId": "SitesBySiteIdAtgsGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "The site id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. tank gauges found for the request.",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TankGauge"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent. No tank gauges found for the request."
+          },
+          "400": {
+            "description": "BadRequest. Site id is mndatory and cannot be default."
+          },
+          "404": {
+            "description": "Not found. No site configuration document found for the requested site."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    },
+    "/sites/{siteId}/atgs/{edgeATGNumber}": {
+      "get": {
+        "tags": [
+          "TankGauge"
+        ],
+        "summary": "Gets tank gauge configuration document for the given site id",
+        "operationId": "SitesBySiteIdAtgsByEdgeATGNumberGet",
+        "consumes": [],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "siteId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "edgeATGNumber",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": false,
+            "type": "string",
+            "default": "2018-11-01"
+          },
+          {
+            "name": "ETag",
+            "in": "header",
+            "description": "The ETag property for a document in cosmos db. This is mandatory for PUT and DELETE configuration and all POST, PUT and DELETE for subcomponents",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. Tank gauge found for the request.",
+            "schema": {
+              "$ref": "#/definitions/TankGauge"
+            }
+          },
+          "400": {
+            "description": "BadRequest. Site id is mndatory and cannot be default."
+          },
+          "404": {
+            "description": "Not Found. No site configuration document found for the requested siter or no tank gauges found for the request."
+          },
+          "500": {
+            "description": "InternalServerError. Something went wrong."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SiteConfiguration": {
+      "required": [
+        "timeZone"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "legacySystemSiteId": {
+          "type": "string"
+        },
+        "organizationId": {
+          "type": "string"
+        },
+        "deviceId": {
+          "type": "string"
+        },
+        "deliveryInfoProvider": {
+          "type": "string"
+        },
+        "deliverySiteIdentifier": {
+          "type": "string"
+        },
+        "businessStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "documentDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "contacts": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
+        "brandId": {
+          "type": "string"
+        },
+        "siteStatus": {
+          "type": "string"
+        },
+        "reconciliationMethod": {
+          "type": "string"
+        },
+        "openingAndClosingTime": {
+          "type": "object",
+          "properties": {
+            "Sunday": {
+              "$ref": "#/definitions/StoreHours"
+            },
+            "Monday": {
+              "$ref": "#/definitions/StoreHours"
+            },
+            "Tuesday": {
+              "$ref": "#/definitions/StoreHours"
+            },
+            "Wednesday": {
+              "$ref": "#/definitions/StoreHours"
+            },
+            "Thursday": {
+              "$ref": "#/definitions/StoreHours"
+            },
+            "Friday": {
+              "$ref": "#/definitions/StoreHours"
+            },
+            "Saturday": {
+              "$ref": "#/definitions/StoreHours"
+            }
+          }
+        },
+        "closingTime": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string"
+        },
+        "complianceMethod": {
+          "type": "string"
+        },
+        "tanks": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tank"
+          }
+        },
+        "tankIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "manifolds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Manifold"
+          }
+        },
+        "manifoldIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nozzles": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Nozzle"
+          }
+        },
+        "nozzleIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fuelingPoints": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FuelingPoint"
+          }
+        },
+        "fuelingPointIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "forecourtControllers": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ForecourtController"
+          }
+        },
+        "forecourtControllerIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tankGauges": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TankGauge"
+          }
+        },
+        "tankGaugeIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lines": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Line"
+          }
+        },
+        "lineIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sensors": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sensor"
+          }
+        },
+        "sensorIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "reconciliation": {
+          "type": "string"
+        },
+        "compliance": {
+          "type": "string"
+        },
+        "deliveryConfirmation": {
+          "type": "string"
+        },
+        "environmentalRisk": {
+          "type": "string"
+        },
+        "classOfTrade": {
+          "type": "string"
+        },
+        "fillPointType": {
+          "type": "string"
+        },
+        "pumpingMethod": {
+          "type": "string"
+        },
+        "userGroups": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "sirInfoProvider": {
+          "type": "string"
+        },
+        "sirSiteIdentifier": {
+          "type": "string"
+        },
+        "isTwentyFourHour": {
+          "type": "boolean"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "isPrimary": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "StoreHours": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string"
+        },
+        "endTime": {
+          "type": "string"
+        }
+      }
+    },
+    "Tank": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "edgeTankNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "edgeATGNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "deliveryTankNumber": {
+          "type": "string"
+        },
+        "vesselNumber": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "diameter": {
+          "format": "double",
+          "type": "number"
+        },
+        "capacity": {
+          "format": "double",
+          "type": "number"
+        },
+        "tilt": {
+          "format": "double",
+          "type": "number"
+        },
+        "endShape": {
+          "type": "string"
+        },
+        "orientation": {
+          "type": "string"
+        },
+        "varianceThreshold": {
+          "format": "double",
+          "type": "number"
+        },
+        "safeWorkingCapacity": {
+          "format": "double",
+          "type": "number"
+        },
+        "safetyStock": {
+          "format": "double",
+          "type": "number"
+        },
+        "overfillLevel": {
+          "format": "double",
+          "type": "number"
+        },
+        "cylindricalLength": {
+          "format": "double",
+          "type": "number"
+        },
+        "tankBuild": {
+          "type": "string"
+        },
+        "aboveGround": {
+          "type": "boolean"
+        },
+        "bunkered": {
+          "type": "boolean"
+        },
+        "stage2Return": {
+          "type": "boolean"
+        },
+        "dateInstalled": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastTested": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "relineDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "leakDetectionType": {
+          "type": "string"
+        },
+        "sirTankIdentifier": {
+          "type": "string"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "Manifold": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "manifoldNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "primaryTankId": {
+          "type": "string"
+        },
+        "secondaryTankIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capacity": {
+          "format": "double",
+          "type": "number"
+        },
+        "safeWorkingCapacity": {
+          "format": "double",
+          "type": "number"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "Nozzle": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "forecourtControllerNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fuelingPointNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "blendedProductId": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "nozzleNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "hoseNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "edgeGradeId": {
+          "type": "string"
+        },
+        "connectedTanks": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedTank"
+          }
+        },
+        "isUPV": {
+          "type": "boolean"
+        },
+        "isACV": {
+          "type": "boolean"
+        },
+        "isHGV": {
+          "type": "boolean"
+        },
+        "isTCD": {
+          "type": "boolean"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "FuelingPoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "forecourtControllerNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fuelingPointNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "CTA": {
+          "type": "string"
+        },
+        "paymentType": {
+          "type": "string"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "leakDetectionType": {
+          "type": "string"
+        },
+        "meterType": {
+          "type": "string"
+        },
+        "atcManufacturer": {
+          "type": "string"
+        },
+        "atcModel": {
+          "type": "string"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "ForecourtController": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "forecourtControllerNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "makeAndModel": {
+          "type": "string"
+        },
+        "pointOfSale": {
+          "type": "string"
+        },
+        "kioskController": {
+          "type": "string"
+        },
+        "combineKCUPOS": {
+          "type": "string"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "TankGauge": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "edgeATGNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "Line": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "edgeATGNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "edgeLineNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "lineLabel": {
+          "type": "string"
+        },
+        "leakDetectionType": {
+          "type": "string"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "Sensor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "documentId": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "edgeATGNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "edgeSensorNumber": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "sensorLabel": {
+          "type": "string"
+        },
+        "sensorCategory": {
+          "type": "string"
+        },
+        "sensorLocation": {
+          "type": "string"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "documentETag": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectedTank": {
+      "type": "object",
+      "properties": {
+        "tankId": {
+          "type": "string"
+        },
+        "blendRatio": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "ManifoldDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "manifoldNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "primaryTankId": {
+          "type": "string"
+        },
+        "secondaryTankIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "productId": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "totalCapacity": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "MeterCalibration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "nozzleId": {
+          "type": "string"
+        },
+        "effectiveDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "meterCalibrationReading": {
+          "format": "double",
+          "type": "number"
+        },
+        "_etag": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResultSet[SiteIdOrgIdPair]": {
+      "type": "object",
+      "properties": {
+        "continuationToken": {
+          "type": "string"
+        },
+        "items": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteIdOrgIdPair"
+          }
+        },
+        "totalCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SiteIdOrgIdPair": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "string"
+        },
+        "organizationId": {
+          "type": "string"
+        }
+      }
+    },
+    "TankInfo": {
+      "type": "object",
+      "properties": {
+        "construction": {
+          "type": "string"
+        },
+        "safeWorkingCapacity": {
+          "format": "double",
+          "type": "number"
+        },
+        "nominalCapacity": {
+          "format": "double",
+          "type": "number"
+        },
+        "listOfPumpsOrNozzles": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pumpingMethod": {
+          "type": "string"
+        },
+        "fillPointType": {
+          "type": "string"
+        },
+        "gaugeType": {
+          "type": "string"
+        },
+        "atc": {
+          "type": "boolean"
+        },
+        "stage2VaporRecovery": {
+          "type": "boolean"
+        },
+        "partOfLinkOrVirtualTank": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "compartmented": {
+          "type": "string"
+        },
+        "aboveGround": {
+          "type": "boolean"
+        },
+        "siteId": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "environmentalRisk": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "edgeTankNumber": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TankDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "capacity": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "tags": []
+}
