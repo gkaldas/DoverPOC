@@ -12,8 +12,11 @@
     }
    
   },
-  "host": "api-sapphire.dataservices-qa.doverfs.com/siteconfigurationapi/index.html",
-  "schemes": "https",
+    "host": "api-sapphire.dataservices-qa.doverfs.com",
+  "basePath": "/siteconfigurationapi/index.html",
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/sites/{siteId}/contacts": {
       "get": {
