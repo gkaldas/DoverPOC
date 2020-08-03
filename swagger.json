@@ -5,8 +5,6 @@
     "title": "SiteConfiguration",
     "description": "Sapphire Wetstock Reconcillation (ASP.NET Core 2.0)",
     "termsOfService": "",
-    "host": "https://api-sapphire.dataservices-qa.doverfs.com/siteconfigurationapi/index.html",
-    "schemes": "https"
     "contact": {
       "name": "Sapphire SiteConfiguration API",
       "url": "doverfs.com",
