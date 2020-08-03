@@ -28,20 +28,6 @@
           "text/json"
         ],
         "parameters": [
-           {
-            "host": "https://api-sapphire.dataservices-qa.doverfs.com/siteconfigurationapi/index.html",
-            "in": "path",
-            "description": "Host URL.","schemes": "https",
-            "required": true,
-            "type": "string"
-          },
-         {
-            "schemes": "https",
-            "in": "path",
-            "description": "Host URL Scheme.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "siteId",
             "in": "path",
