@@ -29,28 +29,13 @@
         "dataType": { "type": "string" },
         "isAcknowledged": { "type": "boolean" },
         "acknowledgedBy": { "type": "string" },
-        "acknowledgedAt": {
-          "format": "date-time",
-          "type": "string"
-        },
+        "acknowledgedAt": { "type": "string" },
         "comment": { "type": "string" },
-        "createdAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "businessDay": {
-          "format": "date",
-          "type": "string"
-        },
+        "createdAt": { "type": "string" },
+        "businessDay": { "type": "string" },
         "isActive": { "type": "boolean" },
-        "alertStartTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "alertEndTime": {
-          "format": "date-time",
-          "type": "string"
-        },
+        "alertStartTime": { "type": "string" },
+        "alertEndTime": { "type": "string" },
         "workflowIds": {
           "format": "nullable",
           "type": "string"
