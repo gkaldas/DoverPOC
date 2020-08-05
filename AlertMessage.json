@@ -26,45 +26,37 @@
         "alertCategory": { "type": "string" },
         "alertType": { "type": "string" },
         "isPending": { "type": "boolean" },
-        "dataType": {
-          "nullable": true,
-          "type": "string"
-        },
+        "dataType": { "type": "string" },
         "isAcknowledged": { "type": "boolean" },
         "acknowledgedBy": { "type": "string" },
         "acknowledgedAt": {
           "format": "date-time",
-          "nullable": true,
           "type": "string"
         },
         "comment": { "type": "string" },
         "createdAt": {
           "format": "date-time",
-          "nullable": true,
           "type": "string"
         },
         "businessDay": {
           "format": "date",
-          "nullable": true,
           "type": "string"
         },
         "isActive": { "type": "boolean" },
         "alertStartTime": {
           "format": "date-time",
-          "nullable": true,
           "type": "string"
         },
         "alertEndTime": {
           "format": "date-time",
-          "nullable": true,
           "type": "string"
         },
         "workflowIds": {
-          "nullable": true,
+          "format": "nullable",
           "type": "string"
         },
         "notificationIds": {
-          "nullable": true,
+          "format": "nullable",
           "type": "string"
         },
         "siteName": { "type": "string" }
