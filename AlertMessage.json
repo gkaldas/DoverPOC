@@ -26,22 +26,45 @@
         "alertCategory": { "type": "string" },
         "alertType": { "type": "string" },
         "isPending": { "type": "boolean" },
-        "dataType": { "type": "string" },
+        "dataType": {
+          "nullable": true,
+          "type": "string"
+        },
         "isAcknowledged": { "type": "boolean" },
         "acknowledgedBy": { "type": "string" },
-        "acknowledgedAt": { "type": "string" },
+        "acknowledgedAt": {
+          "format": "date-time",
+          "nullable": true,
+          "type": "string"
+        },
         "comment": { "type": "string" },
-        "createdAt": { "type": "string" },
-        "businessDay": { "type": "string" },
+        "createdAt": {
+          "format": "date-time",
+          "nullable": true,
+          "type": "string"
+        },
+        "businessDay": {
+          "format": "date",
+          "nullable": true,
+          "type": "string"
+        },
         "isActive": { "type": "boolean" },
-        "alertStartTime": { "type": "string" },
-        "alertEndTime": { "type": "string" },
+        "alertStartTime": {
+          "format": "date-time",
+          "nullable": true,
+          "type": "string"
+        },
+        "alertEndTime": {
+          "format": "date-time",
+          "nullable": true,
+          "type": "string"
+        },
         "workflowIds": {
-          "format": "nullable",
+          "nullable": true,
           "type": "string"
         },
         "notificationIds": {
-          "format": "nullable",
+          "nullable": true,
           "type": "string"
         },
         "siteName": { "type": "string" }
